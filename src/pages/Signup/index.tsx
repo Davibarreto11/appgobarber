@@ -47,7 +47,7 @@ const SignUp: React.FC = () => {
         abortEarly: false
       })
 
-      await api.post('/users', data)
+      await api.post('users', data)
 
       Alert.alert(
         'Cadastro realizado com sucesso!',
@@ -62,14 +62,6 @@ const SignUp: React.FC = () => {
         formRef.current?.setErrors(errors)
 
         return
-      }
-
-      try {
-        const response = await fetch('http://localhost:3333')
-        const data = await response.json()
-        console.log('Resposta da API:', data)
-      } catch (error) {
-        console.error('Erro na Solicitação da API:', error)
       }
 
       Alert.alert(
