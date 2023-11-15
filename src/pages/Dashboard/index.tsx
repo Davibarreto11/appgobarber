@@ -64,7 +64,7 @@ const Dashboard: React.FC = () => {
       </Header>
 
       <FlatList<Provider>
-        style={{ paddingTop: 32, paddingBottom: 24, paddingLeft: 16 }}
+        style={{ paddingTop: 32, paddingBottom: 24, paddingLeft: 16, paddingRight: 16 }}
         data={providers}
         ListHeaderComponent={
           <ProvidersListTitle>Cabeleireiros</ProvidersListTitle>
