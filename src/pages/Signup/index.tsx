@@ -115,7 +115,7 @@ const SignUp: React.FC = () => {
                 placeholder='Senha'
               />
 
-              <Button style={{ borderRadius: 10, width: 320 }} onPress={() => { formRef.current?.submitForm() }}>Entrar</Button>
+              <Button style={{ borderRadius: 10, width: 320 }} onPress={() => { formRef.current?.submitForm() }}>Criar conta</Button>
             </Form>
           </Container>
         </ScrollView>

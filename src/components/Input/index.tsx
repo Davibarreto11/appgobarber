@@ -8,13 +8,14 @@ import { Container, TextInput, Icon } from './styles'
 interface PropsInput extends TextInputProps {
   name: string
   icon: string
+  containerStyle?: object
 }
 
 interface InputValueReference {
   value: string
 }
 
-const Input: React.FC<PropsInput> = ({ name, icon, ...rest }) => {
+const Input: React.FC<PropsInput> = ({ name, icon, containerStyle = {}, ...rest }) => {
   const inputElementRef = useRef<any>(null)
 
   const { registerField, defaultValue = '', fieldName, error } = useField(name)
@@ -37,7 +38,7 @@ const Input: React.FC<PropsInput> = ({ name, icon, ...rest }) => {
   }, [registerField, fieldName])
 
   return (
-    <Container isErrored={!!error}>
+    <Container style={containerStyle} isErrored={!!error}>
       <Icon name={icon} size={20} color='#FFF' />
 
       <TextInput
