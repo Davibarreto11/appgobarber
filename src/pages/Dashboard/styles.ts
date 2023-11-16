@@ -30,9 +30,9 @@ export const UserName = styled.Text`
 export const ProfileButton = styled.TouchableOpacity``
 
 export const UserAvatar = styled.Image`
-  width: 56px;
-  height: 56px;
-  border-radius: 28px;
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
 `
 export const ProvidersListTitle = styled.Text`
   font-size: 24px;
@@ -43,7 +43,6 @@ export const ProvidersListTitle = styled.Text`
 
 export const ProviderContainer = styled(RectButton)`
   background: #3e3b47;
-  border-radius: 10px;
   padding: 20px;
   margin-bottom: 16px;
 
