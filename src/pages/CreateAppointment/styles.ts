@@ -31,21 +31,22 @@ export const Header = styled.View`
 `
 
 export const BackButton = styled.TouchableOpacity`
-
+  padding-right: 8px;
 `
 
 export const HeaderTitle = styled.Text`
   color: #f5ede8;
   font-family: 'RobotoSlab-Medium';
   font-size: 20px;
-  margin-left: 16px;
+  margin-right: auto;
 `
+
+export const ProfileButon = styled.TouchableOpacity``
 
 export const UserAvatar = styled.Image`
   width: 50px;
   height: 50px;
   border-radius: 25px;
-  margin-left: auto;
 `
 
 export const Content = styled.ScrollView``
