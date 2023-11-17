@@ -1,8 +1,9 @@
 import React, { useRef, useCallback } from 'react'
 import { View, ScrollView, KeyboardAvoidingView, Platform, Alert } from 'react-native'
-import Icon from 'react-native-vector-icons/Feather'
 import { useAuth } from '../../hooks/Auth'
 import { useNavigation } from '@react-navigation/native'
+import Icon from 'react-native-vector-icons/Feather'
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker'
 
 import * as Yup from 'yup'
 import api from '../../services/api'
@@ -101,7 +102,30 @@ const Profile: React.FC = () => {
         'Ocorreu um erro ao atualizar seu perfil, cheque seus dados.'
       )
     }
-  }, [navigation])
+  }, [navigation, updateUser])
+
+  const handleUpdateAvatarWithCamera = useCallback(() => {
+    launchImageLibrary({
+      mediaType: 'photo',
+      includeBase64: false
+    }, response => {
+      if (response.didCancel) {
+        return
+      }
+
+      if (response.errorCode) {
+        Alert.alert('Erro ao atualizar seu avatar.')
+      }
+
+      const photo = new FormData()
+
+      photo.append('avatar', {
+        uri: response.assets?.[0]?.uri
+      })
+
+      api.patch('/users/avatar', photo)
+    })
+  }, [updateUser, user.id])
 
   const handleGoBack = useCallback(() => {
     navigation.goBack()
@@ -123,7 +147,7 @@ const Profile: React.FC = () => {
               <Icon name='chevron-left' size={24} color='#999591' />
             </BackButton>
 
-            <UserAvatarButton onPress={() => {}}>
+            <UserAvatarButton onPress={handleUpdateAvatarWithCamera}>
               <UserAvatar source={{ uri: user.avatar_url }} />
             </UserAvatarButton>
 
