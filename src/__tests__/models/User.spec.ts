@@ -17,9 +17,9 @@ const mockUser: User = {
 
 describe('User', () => {
   test('should be able to sign in', async () => {
-    const { data } = await api.post('sessions', {
+    const { data } = await api.post('/sessions', {
       email: 'davi@gmail.com',
-      password: '123456'
+      password: '123321'
     })
 
     expect(data).toHaveProperty('token')

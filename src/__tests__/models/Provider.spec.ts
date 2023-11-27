@@ -19,9 +19,9 @@ const mockAvailabilityProvider: AvailabilityProvider = {
 }
 
 test('should be able list to providers in dashboard', async () => {
-  const { data } = await api.post('sessions', {
+  const { data } = await api.post('/sessions', {
     email: 'davi@gmail.com',
-    password: '123456'
+    password: '123321'
   })
 
   const { token } = data
@@ -38,7 +38,7 @@ test('should be able list to providers in dashboard', async () => {
 test('should be able list to providers in createAppointment', async () => {
   const { data } = await api.post('sessions', {
     email: 'davi@gmail.com',
-    password: '123456'
+    password: '123321'
   })
 
   const { token } = data
@@ -51,16 +51,17 @@ test('should be able list to providers in createAppointment', async () => {
 
   const selectedProvider = listProviders.data?.[0].id
 
-  const availabilityResponse = await api.post(`/providers/${selectedProvider}/day-availability`, {
-    month: new Date().getMonth() + 1,
-    year: new Date().getFullYear(),
-    day: new Date().getDate()
-  },
-  {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  })
+  const availabilityResponse = await api.get(`/providers/${selectedProvider}/day-availability`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+      params: {
+        month: new Date().getMonth() + 1,
+        year: new Date().getFullYear(),
+        day: new Date().getDate()
+      }
+    })
 
   // const appointmentResponse = await api.post('appointments', {
   //   provider_id: selectedProvider,
