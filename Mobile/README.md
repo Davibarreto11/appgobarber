@@ -57,4 +57,4 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 
 ## API
-https://github.com/Davibarreto11/nodeTypescript
+https://github.com/Davibarreto11/appgobarber/tree/main/Backend
