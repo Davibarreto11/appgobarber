@@ -13,7 +13,7 @@ export default {
 
   config: {
     redis: {
-      host: 'localhost',
+      host: 'redis-db',
       port: 6379,
       password: undefined
     }

@@ -4,9 +4,9 @@ import Notification from '../../../modules/notifications/infra/typeorm/schemas/N
 
 export const AppDataSource = new DataSource({
   type: 'mongodb',
-  host: 'localhost',
+  host: 'mongo-db',
   port: 27017,
-  database: 'gobarber',
+  database: 'database',
   useUnifiedTopology: true,
   entities: [Notification]
 })

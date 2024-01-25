@@ -1,0 +1,58 @@
+version: '3'
+services:
+  postgres-db:
+    image: bitnami/postgresql:latest
+    container_name: postgres-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: database
+    ports:
+      - "5432:5432"
+    volumes:
+      - /init.sql
+
+  mongo-db:
+    image: mongo
+    container_name: mongo-db
+    ports:
+      - "27017:27017"
+
+  redis-db:
+    image: redis:alpine
+    container_name: redis-db
+    ports:
+      - "6379:6379"
+
+  api:
+    image: node:20
+    container_name: api
+    working_dir: /src/shared/infra/http/server
+    environment:
+      DB_HOST: postgres-db
+      DB_PORT: 5432
+      DB_NAME: database
+      DB_USER: postgres
+      DB_PASSWORD: docker
+    volumes:
+      - ./backend:/src/shared/infra/http/server
+    ports:
+      - "3333:3333"
+    depends_on:
+      - postgres-db
+      - mongo-db
+      - redis-db
+    command: sh -c "yarn install && yarn typeorm -- -d ./src/shared/infra/database/index.ts migration:run && yarn dev:server"
+
+  react-app:
+    build: .
+    image: node:20 
+    container_name: react-web
+    working_dir: /src
+    depends_on:
+      - api
+    volumes:
+      - ./web:/src
+    ports:
+      - "3000:3000"
+    command: yarn start
